@@ -1,6 +1,7 @@
 ---
 - name: Converge
   hosts: all
+  become: yes
   tasks:
     - name: "Include molecule-4linux"
       include_role:

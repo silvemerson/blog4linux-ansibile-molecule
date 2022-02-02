@@ -1,0 +1,35 @@
+---
+
+- name: Instala Apache2 na Familia Debian
+  apt: name=apache2 update_cache=yes state=latest
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Instala Apache2 na familia RedHat
+  yum: name=httpd update_cache=yes state=latest
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+
+
+- name: 'Configurando Site'
+  copy:
+     src: 'files/index.html'
+     dest: '/var/www/html/index.html'
+
+
+- name: restart apache
+  service: 
+    name: apache2 
+    state: restarted 
+    enabled: yes
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: restart httpd
+  service: 
+    name: httpd 
+    state: restarted 
+    enabled: yes
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+
+- name: Check that you can connect (GET) to a page and it returns a status 200
+  uri:
+    url: http://localhost
+    method: GET
