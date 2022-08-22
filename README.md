@@ -3,4 +3,4 @@ Ansible - Introdução ao Molecule
 
 Repositório referente ao post no blog da 4Linux
 
-Link: [Ainda nao foi publicado]
+Link: https://blog.4linux.com.br/ansible-introducao-ao-molecule/
